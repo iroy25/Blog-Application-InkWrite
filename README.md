@@ -1,189 +1,158 @@
+# ✍️ InkWrite — Full Stack Blog Platform
 
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: var(--font-mono, monospace); background: transparent; color: var(--color-text-primary); font-size: 13px; line-height: 1.7; padding: 1rem 0; }
-  .md { max-width: 860px; }
-  .badge-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 20px; }
-  .badge { background: var(--color-background-secondary); border: 1px solid var(--color-border-tertiary); border-radius: 999px; padding: 2px 10px; font-size: 11px; color: var(--color-text-secondary); font-family: var(--font-sans); }
-  .badge.java { background: #fff3e0; color: #b85c00; border-color: #f4a83a55; }
-  .badge.spring { background: #e8f5e9; color: #1b5e20; border-color: #43a04755; }
-  .badge.react { background: #e3f2fd; color: #0d47a1; border-color: #1976d255; }
-  .badge.mysql { background: #e8eaf6; color: #283593; border-color: #3949ab55; }
-  .badge.jwt { background: #fce4ec; color: #880e4f; border-color: #e91e6355; }
-  .badge.swagger { background: #e0f7fa; color: #006064; border-color: #0097a755; }
-  @media (prefers-color-scheme: dark) {
-    .badge.java { background: #3e2200; color: #ffb74d; border-color: #f4a83a55; }
-    .badge.spring { background: #1b3a1e; color: #81c784; border-color: #43a04755; }
-    .badge.react { background: #0d2a4a; color: #64b5f6; border-color: #1976d255; }
-    .badge.mysql { background: #1a1f4a; color: #9fa8da; border-color: #3949ab55; }
-    .badge.jwt { background: #3e0a1e; color: #f48fb1; border-color: #e91e6355; }
-    .badge.swagger { background: #00222a; color: #4dd0e1; border-color: #0097a755; }
-  }
-  h1 { font-size: 22px; font-weight: 500; font-family: var(--font-sans); margin-bottom: 4px; color: var(--color-text-primary); }
-  h2 { font-size: 16px; font-weight: 500; font-family: var(--font-sans); margin: 28px 0 10px; color: var(--color-text-primary); border-bottom: 1px solid var(--color-border-tertiary); padding-bottom: 6px; }
-  h3 { font-size: 14px; font-weight: 500; font-family: var(--font-sans); margin: 18px 0 8px; color: var(--color-text-primary); }
-  p { color: var(--color-text-secondary); font-family: var(--font-sans); margin-bottom: 10px; font-size: 14px; }
-  code { background: var(--color-background-secondary); border: 1px solid var(--color-border-tertiary); border-radius: 4px; padding: 1px 6px; font-size: 12px; color: var(--color-text-primary); }
-  pre { background: var(--color-background-secondary); border: 1px solid var(--color-border-tertiary); border-radius: 8px; padding: 14px 16px; overflow-x: auto; margin: 10px 0 16px; }
-  pre code { background: none; border: none; padding: 0; font-size: 12px; }
-  .role-table { width: 100%; border-collapse: collapse; margin: 10px 0 16px; font-family: var(--font-sans); font-size: 13px; }
-  .role-table th { background: var(--color-background-secondary); text-align: left; padding: 8px 12px; border: 1px solid var(--color-border-tertiary); color: var(--color-text-primary); font-weight: 500; }
-  .role-table td { padding: 8px 12px; border: 1px solid var(--color-border-tertiary); color: var(--color-text-secondary); }
-  .role-table tr:hover td { background: var(--color-background-secondary); }
-  .tree { font-family: var(--font-mono); font-size: 12px; color: var(--color-text-secondary); line-height: 1.9; }
-  .tree .dir { color: var(--color-text-primary); font-weight: 500; }
-  .copy-btn { background: var(--color-background-secondary); border: 1px solid var(--color-border-tertiary); border-radius: 6px; padding: 3px 10px; font-size: 11px; font-family: var(--font-sans); color: var(--color-text-secondary); cursor: pointer; float: right; margin-top: -2px; }
-  .copy-btn:hover { background: var(--color-border-tertiary); }
-  .section-note { font-size: 12px; color: var(--color-text-tertiary); font-family: var(--font-sans); margin-top: -6px; margin-bottom: 12px; }
-  ul { color: var(--color-text-secondary); font-family: var(--font-sans); font-size: 14px; padding-left: 20px; margin-bottom: 10px; }
-  li { margin-bottom: 4px; }
-  .pill { display: inline-block; background: var(--color-background-secondary); border-radius: 4px; padding: 1px 7px; font-size: 11px; border: 1px solid var(--color-border-tertiary); margin-right: 4px; color: var(--color-text-secondary); font-family: var(--font-mono); }
-  .admin-note { background: var(--color-background-secondary); border-left: 3px solid #f4a83a; border-radius: 0 6px 6px 0; padding: 10px 14px; margin: 10px 0; font-family: var(--font-sans); font-size: 13px; color: var(--color-text-secondary); }
-  .divider { border: none; border-top: 1px solid var(--color-border-tertiary); margin: 24px 0; }
-</style>
-</head>
-<body>
-<div class="md">
+A multi-role blogging platform built with Spring Boot, React.js, MySQL, and JWT authentication. Users can create, manage, and comment on posts; admins have full control over users, posts, and categories.
 
-<h1>✍️ InkWrite — Full Stack Blog Platform</h1>
-<p>A multi-role blogging platform built with Spring Boot, React.js, MySQL, and JWT authentication. Users can create, manage, and comment on posts; admins have full control over users, posts, and categories.</p>
+![Java](https://img.shields.io/badge/Java_17+-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
+![Spring Security](https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white)
+![React](https://img.shields.io/badge/React.js-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
+![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)
+![Lombok](https://img.shields.io/badge/Lombok-BC4521?style=for-the-badge&logoColor=white)
 
-<div class="badge-row">
-  <span class="badge java">Java 17+</span>
-  <span class="badge spring">Spring Boot</span>
-  <span class="badge spring">Spring Security</span>
-  <span class="badge spring">Spring Data JPA</span>
-  <span class="badge react">React.js</span>
-  <span class="badge mysql">MySQL</span>
-  <span class="badge jwt">JWT</span>
-  <span class="badge swagger">Swagger / OpenAPI</span>
-  <span class="badge">Lombok</span>
-</div>
+---
 
-<hr class="divider">
+## 📋 Table of Contents
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Environment Configuration](#environment-configuration)
+- [API Documentation](#api-documentation)
+- [Role System](#role-system)
+- [Diagrams](#diagrams)
 
-<h2>📋 Table of Contents</h2>
-<ul>
-  <li><a href="#features" style="color:var(--color-text-info)">Features</a></li>
-  <li><a href="#tech-stack" style="color:var(--color-text-info)">Tech Stack</a></li>
-  <li><a href="#project-structure" style="color:var(--color-text-info)">Project Structure</a></li>
-  <li><a href="#getting-started" style="color:var(--color-text-info)">Getting Started</a></li>
-  <li><a href="#env-config" style="color:var(--color-text-info)">Environment Configuration</a></li>
-  <li><a href="#api-docs" style="color:var(--color-text-info)">API Documentation</a></li>
-  <li><a href="#roles" style="color:var(--color-text-info)">Role System</a></li>
-  <li><a href="#diagrams" style="color:var(--color-text-info)">Diagrams</a></li>
-</ul>
+---
 
-<hr class="divider">
+## ✅ Features
 
-<h2 id="features">✅ Features</h2>
+### 👤 User
+- Register and login with JWT-based authentication
+- Create, update, and delete own posts
+- Upload images with posts (max 10MB)
+- Read posts by other users
+- Comment on any post including reply to other comments
+- Read all comments on a post
 
-<h3>👤 User</h3>
-<ul>
-  <li>Register and login with JWT-based authentication</li>
-  <li>Create, update, and delete own posts</li>
-  <li>Read posts by other users</li>
-  <li>Comment on any post (including reply to other comments)</li>
-  <li>Read all comments on a post</li>
-</ul>
+### 🛡️ Admin
+- Full CRUD over all posts and users
+- Create and manage post categories
+- Registers as normal user → role manually assigned in DB → redirected to Admin Dashboard on login
 
-<h3>🛡️ Admin</h3>
-<ul>
-  <li>Full CRUD over all posts and users</li>
-  <li>Create and manage post categories</li>
-  <li>Registers as a normal user → role manually assigned in DB → redirected to Admin Dashboard on login</li>
-</ul>
+---
 
-<hr class="divider">
+## 🛠️ Tech Stack
 
-<h2 id="tech-stack">🛠️ Tech Stack</h2>
-<table class="role-table">
-  <tr><th>Layer</th><th>Technology</th></tr>
-  <tr><td>Backend</td><td>Spring Boot, Spring Security, Spring Data JPA</td></tr>
-  <tr><td>Frontend</td><td>React.js</td></tr>
-  <tr><td>Database</td><td>MySQL</td></tr>
-  <tr><td>Auth</td><td>JWT (stored in localStorage)</td></tr>
-  <tr><td>API Docs</td><td>Swagger / OpenAPI</td></tr>
-  <tr><td>Utilities</td><td>Lombok, Maven</td></tr>
-</table>
+| Layer | Technology |
+|---|---|
+| Backend | Spring Boot, Spring Security, Spring Data JPA |
+| Frontend | React.js |
+| Database | MySQL |
+| Auth | JWT (Bearer Token, localStorage) |
+| API Docs | Swagger / OpenAPI |
+| Utilities | Lombok, Maven |
 
-<hr class="divider">
+---
 
-<h2 id="getting-started">🚀 Getting Started</h2>
+## 🚀 Getting Started
 
-<h3>Prerequisites</h3>
-<ul>
-  <li>Java 17+</li>
-  <li>Node.js 18+</li>
-  <li>MySQL 8+</li>
-  <li>Maven</li>
-</ul>
+### Prerequisites
+- Java 17+
+- Node.js 18+
+- MySQL 8
+- Maven
+
+---
+
+## ⚙️ Environment Configuration
+
+`backend/src/main/resources/application.properties`:
+
+```properties
+# Server
+server.port=9095
+
+# Database
+spring.datasource.url=jdbc:mysql://localhost:3306/inkwrite_db
+spring.datasource.username=DB_USERNAME
+spring.datasource.password=DB_PASSWORD
+
+# JPA
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+# File Upload
+spring.servlet.multipart.max-file-size=10MB
+spring.servlet.multipart.max-request-size=10MB
+
+# Image Storage
+project.image=images/
+
+# Security Logging (change to INFO before production)
+logging.level.org.springframework.security=DEBUG
+```
 
 
-<hr class="divider">
+## 📖 API Documentation
 
-<h2 id="api-docs">📖 API Documentation</h2>
-<p>Swagger UI is available once the backend is running:</p>
-<pre><code>http://localhost:9095/swagger-ui/index.html</code></pre>
+Swagger UI is available once the backend is running: `http://localhost:9095/swagger-ui/index.html`
 
-<p>Base URL for all endpoints:</p>
-<pre><code>http://localhost:9095/api/v1/</code></pre>
+Base URL for all endpoints: `http://localhost:9095/api/v1/`
 
-<h3>Key Endpoints</h3>
-<table class="role-table">
-  <tr><th>Method</th><th>Endpoint</th><th>Access</th></tr>
-  <tr><td>POST</td><td><code>/api/v1/auth/register</code></td><td>Public</td></tr>
-  <tr><td>POST</td><td><code>/api/v1/auth/login</code></td><td>Public</td></tr>
-  <tr><td>GET</td><td><code>/api/v1/posts</code></td><td>Public</td></tr>
-  <tr><td>POST</td><td><code>/api/v1/posts</code></td><td>User / Admin</td></tr>
-  <tr><td>PUT</td><td><code>/api/v1/posts/{id}</code></td><td>Author / Admin</td></tr>
-  <tr><td>DELETE</td><td><code>/api/v1/posts/{id}</code></td><td>Author / Admin</td></tr>
-  <tr><td>POST</td><td><code>/api/v1/comments</code></td><td>User / Admin</td></tr>
-  <tr><td>GET</td><td><code>/api/v1/admin/users</code></td><td>Admin only</td></tr>
-  <tr><td>POST</td><td><code>/api/v1/admin/categories</code></td><td>Admin only</td></tr>
-</table>
 
-<hr class="divider">
 
-<h2 id="roles">🔐 Role System</h2>
-<table class="role-table">
-  <tr><th>Role ID</th><th>Role Name</th><th>Assigned By</th></tr>
-  <tr><td><code>501</code></td><td>ROLE_ADMIN</td><td>Manually in DB</td></tr>
-  <tr><td><code>502</code></td><td>ROLE_USER</td><td>Auto on registration</td></tr>
-</table>
+### Key Endpoints
 
-<div class="admin-note">
-  ⚠️ <strong>Admin Setup:</strong> To make a user an admin, manually update their role in the database:<br><br>
-  <code>UPDATE user_role SET role_id = 501 WHERE user_id = {your_user_id};</code><br><br>
-  On next login, the user will be redirected to the Admin Dashboard automatically.
-</div>
+| Method | Endpoint | Access |
+|---|---|---|
+| POST | `/api/v1/auth/register` | Public |
+| POST | `/api/v1/auth/login` | Public |
+| GET | `/api/v1/posts` | Public |
+| POST | `/api/v1/posts` | User / Admin |
+| PUT | `/api/v1/posts/{id}` | Author / Admin |
+| DELETE | `/api/v1/posts/{id}` | Author / Admin |
+| POST | `/api/v1/comments` | User / Admin |
+| GET | `/api/v1/admin/users` | Admin only |
+| POST | `/api/v1/admin/categories` | Admin only |
 
-<hr class="divider">
+---
 
-<h2 id="diagrams">📊 Diagrams</h2>
-<p>The following diagrams are available in the <code>/docs</code> folder:</p>
-<ul>
-  <li>📸 Screenshots — UI walkthrough</li>
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 124104" src="https://github.com/user-attachments/assets/24829679-0ace-4cd0-a13a-895ea154cd8c" />
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 124052" src="https://github.com/user-attachments/assets/fb96522d-388b-4d63-a73a-1cefd8c5b703" />
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 124115" src="https://github.com/user-attachments/assets/08e4da08-3a00-4da1-bc2e-60fc0a13a0d6" />
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 124224" src="https://github.com/user-attachments/assets/a5d92052-41c8-4b7b-b9bd-104352e44dc9" />
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 124241" src="https://github.com/user-attachments/assets/45f1566f-f5b8-402c-bf15-017ac3ab89be" />
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 130223" src="https://github.com/user-attachments/assets/a34a3638-6186-4c00-9266-14667ba1b9eb" />
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 130309" src="https://github.com/user-attachments/assets/6fe073c7-9a84-441c-9fa3-26b5d42feaf5" />
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 130437" src="https://github.com/user-attachments/assets/4e92d06e-5488-4031-93c8-c2ac808675cf" />
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 130501" src="https://github.com/user-attachments/assets/048680c7-7961-408a-badc-1c7127805410" />
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 131539" src="https://github.com/user-attachments/assets/0b6d77fc-c630-4d83-93b5-9e83369c00ca" />
+## 🔐 Role System
 
-</ul>
+| Role ID | Role Name | Assigned By |
+|---|---|---|
+| `501` | ROLE_ADMIN | Manually in DB |
+| `502` | ROLE_USER | Auto on registration |
 
-<hr class="divider">
+> ⚠️ **Admin Setup:** Run this SQL after registering:
+> ```sql
+> UPDATE user_roles SET role_id = 501 WHERE user_id = {your_user_id};
+> ```
+> On next login the user will be redirected to Admin Dashboard automatically.
 
-<p style="font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-sans)">Made with ☕ by Twinkle &nbsp;|&nbsp; InkWrite &nbsp;|&nbsp; 2025</p>
+---
 
-</div>
-</body>
-</html>
+## 📸 Diagrams
+### Screenshots — UI walkthrough
+<img width="1920" height="1080" alt="Screenshot 2026-05-25 124052" src="https://github.com/user-attachments/assets/facc05d3-9f43-43ed-bf28-b6260a6e8ded" />
+<img width="1920" height="1080" alt="Screenshot 2026-05-25 124104" src="https://github.com/user-attachments/assets/9800f86e-394d-4d61-a5d4-09a96330d574" />
+<img width="1920" height="1080" alt="Screenshot 2026-05-25 124115" src="https://github.com/user-attachments/assets/c05ae41e-413e-4d0e-b42d-ab8800dc1e6c" />
+<img width="1920" height="1080" alt="Screenshot 2026-05-25 124241" src="https://github.com/user-attachments/assets/61bff1ce-1791-453b-be48-25571f34b61b" />
+<img width="1920" height="1080" alt="Screenshot 2026-05-25 130223" src="https://github.com/user-attachments/assets/75650b49-3546-4ae1-be4b-93140682b1a4" />
+<img width="1920" height="1080" alt="Screenshot 2026-05-25 130309" src="https://github.com/user-attachments/assets/ad0818d4-23fb-4cdc-8838-adee6af966c9" />
+<img width="1920" height="1080" alt="Screenshot 2026-05-25 130437" src="https://github.com/user-attachments/assets/62bf02fe-1311-4dfe-bcba-6039a9c5c122" />
+<img width="1920" height="1080" alt="Screenshot 2026-05-25 130501" src="https://github.com/user-attachments/assets/6da18795-0a78-4751-ab53-a9707a3947ff" />
+<img width="1920" height="1080" alt="Screenshot 2026-05-25 131539" src="https://github.com/user-attachments/assets/2207b244-1f50-4d68-bc5e-7eb7fe7ec22a" />
+
+
+
+
+
+
+
+
+
+
+---
+
+

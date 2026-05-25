@@ -72,23 +72,16 @@ A multi-role blogging platform built with Spring Boot, React.js, MySQL, and JWT 
 # Server
 server.port=9095
 
-# Database
 spring.datasource.url=jdbc:mysql://localhost:3306/inkwrite_db
 spring.datasource.username=DB_USERNAME
 spring.datasource.password=DB_PASSWORD
 
-# JPA
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
-
-# File Upload
 spring.servlet.multipart.max-file-size=10MB
 spring.servlet.multipart.max-request-size=10MB
-
-# Image Storage
 project.image=images/
 
-# Security Logging (change to INFO before production)
 logging.level.org.springframework.security=DEBUG
 ```
 

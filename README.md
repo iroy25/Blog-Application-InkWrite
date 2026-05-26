@@ -99,8 +99,9 @@ A multi-role blogging platform built with Spring Boot, React.js, MySQL, and JWT 
 <img width="1920" height="1080" alt="1" src="https://github.com/user-attachments/assets/098e8cad-1c01-4903-81f9-ca0cd5c60d0a" />
 <img width="1920" height="1080" alt="2" src="https://github.com/user-attachments/assets/81c55964-db5d-4ca1-a61d-8a9291fb9304" />
 <img width="1920" height="1080" alt="3" src="https://github.com/user-attachments/assets/59117e0e-8343-40c9-b652-efad605cd335" />
-<img width="1920" height="1080" alt="4" src="https://github.com/user-attachments/assets/f5f65fcb-<img width="1920" height="1080" alt="5" src="https://github.com/user-attachments/assets/173b362b-bdf5-460b-a815-9c42f3b8a345" />
-9207-4166-8328-80095de55d00" />
+<img width="1920" height="1080" alt="4" src="https://github.com/user-attachments/assets/f5f65fcb-9207-4166-8328-80095de55d00" />
+<img width="1920" height="1080" alt="5" src="https://github.com/user-attachments/assets/173b362b-bdf5-460b-a815-9c42f3b8a345" />
+
 <img width="1920" height="1080" alt="6" src="https://github.com/user-attachments/assets/42bbc4b7-1e57-4904-8bac-a276f4572ed1" />
 <img width="1920" height="1080" alt="7" src="https://github.com/user-attachments/assets/3fb67ccf-3ba8-48b3-8032-1f7ba229a717" />
 <img width="1920" height="1080" alt="8" src="https://github.com/user-attachments/assets/2cf77b0b-9621-449d-b8e7-a67e22fe38f8" />

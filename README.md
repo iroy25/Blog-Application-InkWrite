@@ -17,8 +17,6 @@ A multi-role blogging platform built with Spring Boot, React.js, MySQL, and JWT 
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Getting Started](#getting-started)
-- [Environment Configuration](#environment-configuration)
-- [API Documentation](#api-documentation)
 - [Role System](#role-system)
 - [Diagrams](#diagrams)
 
@@ -46,7 +44,7 @@ A multi-role blogging platform built with Spring Boot, React.js, MySQL, and JWT 
 | Layer | Technology |
 |---|---|
 | Backend | Spring Boot, Spring Security, Spring Data JPA |
-| Frontend | React.js |
+| Frontend | React.js, Tailwind CSS|
 | Database | MySQL |
 | Auth | JWT (Bearer Token, localStorage) |
 | API Docs | Swagger / OpenAPI |
@@ -63,35 +61,6 @@ A multi-role blogging platform built with Spring Boot, React.js, MySQL, and JWT 
 - Maven
 
 ---
-
-## ⚙️ Environment Configuration
-
-`backend/src/main/resources/application.properties`:
-
-```properties
-# Server
-server.port=9095
-
-spring.datasource.url=jdbc:mysql://localhost:3306/inkwrite_db
-spring.datasource.username=DB_USERNAME
-spring.datasource.password=DB_PASSWORD
-
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.servlet.multipart.max-file-size=10MB
-spring.servlet.multipart.max-request-size=10MB
-project.image=images/
-
-logging.level.org.springframework.security=DEBUG
-```
-
-
-## 📖 API Documentation
-
-Swagger UI is available once the backend is running: `http://localhost:9095/swagger-ui/index.html`
-
-Base URL for all endpoints: `http://localhost:9095/api/v1/`
-
 
 
 ### Key Endpoints
@@ -127,15 +96,16 @@ Base URL for all endpoints: `http://localhost:9095/api/v1/`
 
 ## 📸 Diagrams
 ### Screenshots — UI walkthrough
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 124052" src="https://github.com/user-attachments/assets/facc05d3-9f43-43ed-bf28-b6260a6e8ded" />
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 124104" src="https://github.com/user-attachments/assets/9800f86e-394d-4d61-a5d4-09a96330d574" />
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 124115" src="https://github.com/user-attachments/assets/c05ae41e-413e-4d0e-b42d-ab8800dc1e6c" />
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 124241" src="https://github.com/user-attachments/assets/61bff1ce-1791-453b-be48-25571f34b61b" />
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 130223" src="https://github.com/user-attachments/assets/75650b49-3546-4ae1-be4b-93140682b1a4" />
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 130309" src="https://github.com/user-attachments/assets/ad0818d4-23fb-4cdc-8838-adee6af966c9" />
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 130437" src="https://github.com/user-attachments/assets/62bf02fe-1311-4dfe-bcba-6039a9c5c122" />
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 130501" src="https://github.com/user-attachments/assets/6da18795-0a78-4751-ab53-a9707a3947ff" />
-<img width="1920" height="1080" alt="Screenshot 2026-05-25 131539" src="https://github.com/user-attachments/assets/2207b244-1f50-4d68-bc5e-7eb7fe7ec22a" />
+<img width="1920" height="1080" alt="1" src="https://github.com/user-attachments/assets/098e8cad-1c01-4903-81f9-ca0cd5c60d0a" />
+<img width="1920" height="1080" alt="2" src="https://github.com/user-attachments/assets/81c55964-db5d-4ca1-a61d-8a9291fb9304" />
+<img width="1920" height="1080" alt="3" src="https://github.com/user-attachments/assets/59117e0e-8343-40c9-b652-efad605cd335" />
+<img width="1920" height="1080" alt="4" src="https://github.com/user-attachments/assets/f5f65fcb-<img width="1920" height="1080" alt="5" src="https://github.com/user-attachments/assets/173b362b-bdf5-460b-a815-9c42f3b8a345" />
+9207-4166-8328-80095de55d00" />
+<img width="1920" height="1080" alt="6" src="https://github.com/user-attachments/assets/42bbc4b7-1e57-4904-8bac-a276f4572ed1" />
+<img width="1920" height="1080" alt="7" src="https://github.com/user-attachments/assets/3fb67ccf-3ba8-48b3-8032-1f7ba229a717" />
+<img width="1920" height="1080" alt="8" src="https://github.com/user-attachments/assets/2cf77b0b-9621-449d-b8e7-a67e22fe38f8" />
+
+<img width="1920" height="1080" alt="9" src="https://github.com/user-attachments/assets/6b814cbd-fc7f-46cc-b1ae-bf5e9a1e98a5" />
 
 
 

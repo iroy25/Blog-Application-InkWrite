@@ -17,22 +17,22 @@ console.log("AdminLayout isAdmin:", isAdmin);
 if (!user) return <Navigate to="/login" />;
 if (!isAdmin) return <Navigate to="/" />;
 
-  const handleLogout = () => {
-    logout();
-    navigate("/");
+const handleLogout = () => {
+  logout();
+  navigate("/");
   };
 
-  const navItems = [
-    {
-      label: "Dashboard",
-      path: "/admin",
-      icon: (
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <rect x="3" y="3" width="7" height="7" rx="1" />
-          <rect x="14" y="3" width="7" height="7" rx="1" />
-          <rect x="3" y="14" width="7" height="7" rx="1" />
-          <rect x="14" y="14" width="7" height="7" rx="1" />
-        </svg>
+const navItems = [
+  {
+    label: "Dashboard",
+    path: "/admin",
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <rect x="3" y="3" width="7" height="7" rx="1" />
+        <rect x="14" y="3" width="7" height="7" rx="1" />
+        <rect x="3" y="14" width="7" height="7" rx="1" />
+       <rect x="14" y="14" width="7" height="7" rx="1" />
+      </svg>
       ),
     },
     {
@@ -82,53 +82,36 @@ if (!isAdmin) return <Navigate to="/" />;
     },
   ];
 
-  const isActive = (path) =>
-    path === "/admin"
-      ? location.pathname === "/admin"
-      : location.pathname.startsWith(path);
+const isActive = (path) =>
+  path === "/admin"? location.pathname === "/admin" : location.pathname.startsWith(path);
 
-  return (
-    <div style={{ fontFamily: "'DM Sans', sans-serif" }} className="flex min-h-screen bg-[#F7F5F2]">
-
-      <aside
-        className={`${sidebarOpen ? "w-56" : "w-[60px]"} transition-all duration-200 bg-[#2C2C2A] flex flex-col shrink-0 sticky top-0 h-screen`}
-      >
-        {/* Brand */}
-        <div className="flex items-center gap-2 px-4 py-4 border-b border-white/10">
-          <div className="w-7 h-7 bg-[#B4500A] rounded-md flex items-center justify-center shrink-0">
-            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-              <path d="M2 12L5 3L8 9L10 6L12 12" stroke="#E8E6E0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          {sidebarOpen && (
-            <span style={{ fontFamily: "'Lora', serif" }} className="text-[15px] font-medium text-[#E8E6E0] whitespace-nowrap">
-              Ink<span className="text-[#B4500A]">Write</span> <span className="text-[11px] text-white/40 font-normal">admin</span>
-            </span>
-          )}
-        </div>
-
-
-        <nav className="flex flex-col gap-1 p-2 flex-1 mt-2">
+return (
+  <div style={{ fontFamily: "'DM Sans', sans-serif" }} className="flex min-h-screen bg-[#F7F5F2]">
+    <aside className="flex flex-col bg-[#1A1A1A] w-[220px] ..."> 
+      <div className="flex items-center gap-2 px-4 py-4 border-b border-white/10">
+        <div className="w-7 h-7 bg-[#B4500A] rounded-md flex items-center justify-center shrink-0">
+          <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+            <path d="M2 12L5 3L8 9L10 6L12 12" stroke="#E8E6E0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>  
+      </div>
+      
+      <nav className="flex flex-col gap-1 p-2 flex-1 mt-2">
           {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] transition-all duration-150 ${
-                isActive(item.path)
-                  ? "bg-[#B4500A] text-[#E8E6E0]"
-                  : "text-white/60 hover:bg-white/10 hover:text-[#E8E6E0]"
-              }`}
+            <Link key={item.path} to={item.path}  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] transition-all duration-150 
+              ${ isActive(item.path) ? "bg-[#B4500A] text-[#E8E6E0]" : "text-white/60 hover:bg-white/10 hover:text-[#E8E6E0]" }`}
+            
             >
-              <span className="shrink-0">{item.icon}</span>
-              {sidebarOpen && <span className="whitespace-nowrap">{item.label}</span>}
+            <span className="shrink-0">{item.icon}</span>
+            {sidebarOpen && <span className="whitespace-nowrap">{item.label}</span>}
             </Link>
           ))}
-        </nav>
-
-        <div className="p-3 border-t border-white/10 flex flex-col gap-2">
-          {sidebarOpen && user && (
-            <div className="flex items-center gap-2 px-2 py-1.5">
-              <div className="w-7 h-7 rounded-full bg-[#B4500A]/30 flex items-center justify-center text-[11px] font-medium text-[#E8E6E0] shrink-0">
+      </nav>
+      
+      <div className="p-3 border-t border-white/10 flex flex-col gap-2">
+        {sidebarOpen && user && (
+          <div className="flex items-center gap-2 px-2 py-1.5">
+            <div className="w-7 h-7 rounded-full bg-[#B4500A]/30 flex items-center justify-center text-[11px] font-medium text-[#E8E6E0] shrink-0">
                 {user.name?.split(" ").map((p) => p[0]).join("").toUpperCase()}
               </div>
               <div className="flex flex-col min-w-0">
@@ -138,6 +121,7 @@ if (!isAdmin) return <Navigate to="/" />;
             </div>
           )}
           <div className="flex items-center gap-2">
+             {sidebarOpen && (
             <button
               onClick={handleLogout}
               className={`flex items-center gap-2 px-3 py-2 rounded-lg text-[12px] text-white/60 hover:bg-white/10 hover:text-[#E8E6E0] transition ${sidebarOpen ? "flex-1" : "w-full justify-center"}`}
@@ -148,19 +132,21 @@ if (!isAdmin) return <Navigate to="/" />;
                 <line x1="21" y1="12" x2="9" y2="12" />
               </svg>
               {sidebarOpen && "Log out"}
+               Log out
             </button>
-            <button
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="p-2 rounded-lg text-white/40 hover:bg-white/10 hover:text-[#E8E6E0] transition"
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <line x1="3" y1="12" x2="21" y2="12" />
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <line x1="3" y1="18" x2="21" y2="18" />
-              </svg>
-            </button>
-          </div>
-        </div>
+             )}
+             <button
+      onClick={() => setSidebarOpen(!sidebarOpen)}
+      className="p-2 rounded-lg text-white/40 hover:bg-white/10 hover:text-[#E8E6E0] transition"
+    >
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+  </div>
+</div>
       </aside>
 
       <main className="flex-1 min-w-0 p-6 md:p-8">

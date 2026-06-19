@@ -84,7 +84,7 @@ const SinglePostPage = () => {
       {post.imageName && post.imageName !== "default.jpg" && (
         <div className="mb-8 rounded-xl overflow-hidden shadow-md">
           <img
-            src={`http://localhost:9095/api/posts/image/${post.imageName}`}
+            src={`https://blog-application-inkwrite.onrender.com/api/posts/image/${post.imageName}`}
             alt={post.title}
             className="w-full object-cover max-h-[500px]"
             onError={(e) => { e.target.style.display = "none"; }}

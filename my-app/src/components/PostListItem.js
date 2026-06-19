@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 // import postImg from "../images/postImg.jpeg";
 
+const API_URL = "https://blog-application-inkwrite.onrender.com";
+
 const PostListItem = ({ post }) => {
   return (
     <div className="flex flex-col xl:flex-row gap-8">
       <div className="md:hidden xl:block xl:w-1/3">
       
         <img
-          src={post.imageName ? `http://localhost:9095/api/posts/image/${post.imageName}` : 
+          src={post.imageName ? `${API_URL}/api/posts/image/${post.imageName}` : 
           <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
 fill="currentColor" viewBox="0 0 24 24" ></svg>
         }

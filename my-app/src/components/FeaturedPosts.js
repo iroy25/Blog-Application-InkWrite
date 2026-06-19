@@ -25,7 +25,7 @@ const FeaturedPosts = () => {
             <div className="relative overflow-hidden rounded-2xl group">
               {featured.imageName && featured.imageName !== "default.jpg" ? (
                 <img
-                  src={`http://localhost:9095/api/posts/image/${featured.imageName}`}
+                  src={`https://blog-application-inkwrite.onrender.com/api/posts/image/${featured.imageName}`}
                   alt={featured.title}
                   className="w-full object-cover aspect-video group-hover:scale-105 transition-transform duration-500"
                   onError={(e) => (e.target.style.display = "none")}

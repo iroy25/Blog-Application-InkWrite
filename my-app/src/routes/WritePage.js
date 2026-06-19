@@ -40,7 +40,7 @@ const WritePage = () => {
           setContent(post.content || "");
           setCategoryId(post.category?.categoryId || "");
           if (post.imageName && post.imageName !== "default.jpg") {
-            setImagePreview(`http://localhost:9095/api/posts/image/${post.imageName}`);
+            setImagePreview(`https://blog-application-inkwrite.onrender.com/api/posts/image/${post.imageName}`);
           }
         })
         .catch(err => console.error("Failed to fetch post", err));

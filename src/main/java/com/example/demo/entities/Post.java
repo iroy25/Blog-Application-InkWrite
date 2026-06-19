@@ -31,7 +31,7 @@ public class Post {
 	@Column(name="post_title", length=100, nullable=false)
 	private String title;
 	
-	@Column(columnDefinition = "LONGTEXT")
+	@Column(columnDefinition = "TEXT")
 	private String content;
 	
 	private String imageName;

@@ -55,8 +55,8 @@ public class User implements UserDetails{
 	private List<Comment> comments = new ArrayList<>();
 	
 	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name="user_role",joinColumns=@JoinColumn(name="user",referencedColumnName="user_id"),
-	inverseJoinColumns=@JoinColumn(name="role",referencedColumnName="role_id"))
+	@JoinTable(name="user_role",joinColumns=@JoinColumn(name="user_id",referencedColumnName="user_id"),
+	inverseJoinColumns=@JoinColumn(name="role_id",referencedColumnName="role_id"))
 	private Set<Role> roles = new HashSet<>();
 
 	

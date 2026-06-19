@@ -64,14 +64,24 @@ public class AuthController {
 			
 		}
 	}
-	
 	@PostMapping("/register")
-	public ResponseEntity<UserDto> registerUser(@RequestBody UserDto userDto){
-		UserDto registeredUser = this.userService.registerNewUser(userDto);
-		
-		return new ResponseEntity<UserDto>(registeredUser, HttpStatus.CREATED);
-		
+	public ResponseEntity<?> registerUser(@RequestBody UserDto userDto) {
+
+		try {
+
+			UserDto registeredUser = this.userService.registerNewUser(userDto);
+
+			return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(e.getClass().getName() + " : " + e.getMessage());
+		}
 	}
+
 	@GetMapping("/current-user")
 	public ResponseEntity<UserDto> getCurrentUser(Principal principal) {
 	    UserDto user = this.userService.getUserByEmail(principal.getName());

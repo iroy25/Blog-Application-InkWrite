@@ -30,19 +30,44 @@ public class UserServiceImpl implements UserService {
 	private RoleRepo roleRepo;
 	
 	
+
 	@Override
 	public UserDto registerNewUser(UserDto userDto) {
-		User user=this.modelMapper.map(userDto , User.class);
 
-		user.setPassword(this.passwordEncoder.encode(userDto.getPassword()));
+    try {
 
-		Role role= this.roleRepo.findById(AppConstants.NORMAL_USER).get();
-		user.getRoles().add(role); 
-		User newUser=this.userRepo.save(user);
-		System.out.println("Raw password: " + userDto.getPassword());
-		System.out.println("Encoded password: " + user.getPassword());
-		return this.modelMapper.map(newUser, UserDto.class);
-	}
+        System.out.println("===== REGISTER USER START =====");
+        System.out.println("Name: " + userDto.getName());
+        System.out.println("Email: " + userDto.getEmail());
+
+        User user = this.modelMapper.map(userDto, User.class);
+
+        user.setPassword(this.passwordEncoder.encode(userDto.getPassword()));
+
+        System.out.println("Password encoded successfully.");
+
+        Role role = this.roleRepo.findById(AppConstants.NORMAL_USER)
+                .orElseThrow(() -> new RuntimeException("ROLE_NORMAL (502) not found in database"));
+
+        System.out.println("Role found: " + role.getName());
+
+        user.getRoles().add(role);
+
+        User newUser = this.userRepo.save(user);
+
+        System.out.println("User saved successfully. ID = " + newUser.getUserId());
+
+        return this.modelMapper.map(newUser, UserDto.class);
+
+    } catch (Exception e) {
+
+        System.out.println("===== REGISTER USER FAILED =====");
+        e.printStackTrace();
+
+        throw e;
+    }
+}
+
 	
 	@Override
 	public UserDto createUser(UserDto userDto) {

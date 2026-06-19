@@ -1,6 +1,5 @@
 package com.example.demo.security;
 
-import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;

@@ -8,7 +8,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.demo.config.AppConstants;
 import com.example.demo.entities.Role;
@@ -17,8 +16,6 @@ import com.example.demo.repositories.RoleRepo;
 @SpringBootApplication
 public class BlogApplication implements CommandLineRunner{
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private RoleRepo roleRepo;
 	

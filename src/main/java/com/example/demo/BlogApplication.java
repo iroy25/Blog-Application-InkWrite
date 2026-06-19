@@ -29,26 +29,23 @@ public class BlogApplication implements CommandLineRunner{
 	}
 
 	@Override
-	public void run(String... args) throws Exception {
-		
-		try {
-			Role role1= new Role();
+	public void run(String... args) {
+
+		if (roleRepo.count() == 0) {
+
+			Role role1 = new Role();
 			role1.setRoleId(AppConstants.ADMIN_USER);
 			role1.setName("ROLE_ADMIN");
-			
-			Role role2= new Role();
+
+			Role role2 = new Role();
 			role2.setRoleId(AppConstants.NORMAL_USER);
 			role2.setName("ROLE_NORMAL");
-			List<Role> roles= List.of(role1, role2);
-			List<Role> result = this.roleRepo.saveAll(roles);
-			
-			result.forEach(r->{
-				System.out.println(r.getName());
-			});
-		}catch(Exception e) {
-			
-			e.printStackTrace();
+
+			roleRepo.saveAll(List.of(role1, role2));
+
+			System.out.println("Default roles inserted.");
+		} else {
+			System.out.println("Roles already exist.");
 		}
-		
 	}
 }

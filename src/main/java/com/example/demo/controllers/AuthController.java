@@ -65,20 +65,13 @@ public class AuthController {
 		}
 	}
 	@PostMapping("/register")
-	public ResponseEntity<?> registerUser(@RequestBody UserDto userDto) {
-
+	public ResponseEntity<?> registerUser(@RequestBody UserDto userDto){
 		try {
-
 			UserDto registeredUser = this.userService.registerNewUser(userDto);
-
 			return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
-
 		} catch (Exception e) {
-
 			e.printStackTrace();
-
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(e.getClass().getName() + " : " + e.getMessage());
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

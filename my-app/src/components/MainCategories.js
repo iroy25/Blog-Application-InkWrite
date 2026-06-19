@@ -60,7 +60,7 @@ const MainCategories = () => {
   };
 
   return (
-    <div className="hidden md:flex bg-white rounded-3xl xl:rounded-full p-4 border border-[#E8E6E0] items-center justify-between gap-4">
+    <div className="flex flex-wrap bg-white rounded-3xl xl:rounded-full p-4 border border-[#E8E6E0] items-center justify-between gap-4">
 
       <div className="flex items-center gap-2 flex-wrap">
         <Link

@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import java.util.List;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -30,22 +28,23 @@ public class BlogApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) {
+		try {
+			if (!roleRepo.existsById(AppConstants.ADMIN_USER)) {
+				Role role1 = new Role();
+				role1.setRoleId(AppConstants.ADMIN_USER);
+				role1.setName("ROLE_ADMIN");
+				roleRepo.save(role1);
+			}
 
-		if (roleRepo.count() == 0) {
+			if (!roleRepo.existsById(AppConstants.NORMAL_USER)) {
+				Role role2 = new Role();
+				role2.setRoleId(AppConstants.NORMAL_USER);
+				role2.setName("ROLE_NORMAL");
+				roleRepo.save(role2);
+			}
 
-			Role role1 = new Role();
-			role1.setRoleId(AppConstants.ADMIN_USER);
-			role1.setName("ROLE_ADMIN");
-
-			Role role2 = new Role();
-			role2.setRoleId(AppConstants.NORMAL_USER);
-			role2.setName("ROLE_NORMAL");
-
-			roleRepo.saveAll(List.of(role1, role2));
-
-			System.out.println("Default roles inserted.");
-		} else {
-			System.out.println("Roles already exist.");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

@@ -4,7 +4,6 @@ import { useAuth } from "../utils/AuthContext";
 import axiosInstance from "../utils/axiosInstance";
 
 const Comment = ({ comment, onDelete }) => {
-   console.log(comment);
   const { user } = useAuth();
   const [deleting, setDeleting] = useState(false);
 
@@ -20,6 +19,7 @@ const Comment = ({ comment, onDelete }) => {
     try {
       setDeleting(true);
       await axiosInstance.delete(`/api/comments/${comment.id}`);
+      onDelete(comment.id);
       
     } catch (err) {
       alert("Failed to delete comment.");

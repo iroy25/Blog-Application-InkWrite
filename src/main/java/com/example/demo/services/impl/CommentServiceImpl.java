@@ -1,6 +1,5 @@
 package com.example.demo.services.impl;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +21,7 @@ public class CommentServiceImpl implements CommentService {
 	private UserRepo userrepo;
 	@Autowired
 	private CommentRepo commentRepo;
-	@Autowired
-	private ModelMapper modelMapper;
 	
-
 	@Override
 	public CommentDto createComment(CommentDto commentDto, Integer postId, Integer userId) {
 		Post post=this.postrepo.findById(postId).orElseThrow(()
@@ -34,16 +30,18 @@ public class CommentServiceImpl implements CommentService {
 		        .orElseThrow(() ->
 		            new ResourceNotFoundException("User", "user id", userId));
 		
-		Comment comment = this.modelMapper.map(commentDto,Comment.class);
+		Comment comment = new Comment();
+		comment.setContent(commentDto.getContent());
 		comment.setPost(post);
 		comment.setUser(user);
 		Comment savedComment = this.commentRepo.save(comment);
 		
-		CommentDto commentdto = this.modelMapper.map(savedComment, CommentDto.class);
+		CommentDto commentdto = new CommentDto();
 
+		commentdto.setId(savedComment.getId());
+		commentdto.setContent(savedComment.getContent());
 		commentdto.setUserId(savedComment.getUser().getUserId());
 		commentdto.setUserName(savedComment.getUser().getName());
-
 		return commentdto;
 	}
 

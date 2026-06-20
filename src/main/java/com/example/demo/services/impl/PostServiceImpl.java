@@ -3,8 +3,8 @@ package com.example.demo.services.impl;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Set;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -14,6 +14,7 @@ import com.example.demo.entities.Post;
 import com.example.demo.entities.User;
 import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.payloads.CategoryDto;
+import com.example.demo.payloads.CommentDto;
 import com.example.demo.payloads.PostDto;
 import com.example.demo.payloads.PostResponse;
 import com.example.demo.repositories.CategoryRepo;
@@ -29,9 +30,7 @@ public class PostServiceImpl implements PostService {
 	
 	@Autowired
 	private PostRepo postRepo;
-	@Autowired
-	private ModelMapper modelMapper;
-	
+
 	@Autowired
 	private UserRepo userRepo;
 	
@@ -41,13 +40,9 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) {
 
-		User user = this.userRepo.findById(userId)
-				.orElseThrow(() ->
-						new ResourceNotFoundException("User", "User id", userId));
+		User user = this.userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "User id", userId));
 
-		Category category = this.categoryRepo.findById(categoryId)
-				.orElseThrow(() ->
-						new ResourceNotFoundException("Category", "Category id", categoryId));
+		Category category = this.categoryRepo.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException("Category", "Category id", categoryId));
 
 		Post post = new Post();
 
@@ -158,23 +153,33 @@ public class PostServiceImpl implements PostService {
     dto.setAddedDate(post.getAddedDate());
 
     if (post.getCategory() != null) {
+        CategoryDto cat = new CategoryDto();
+        cat.setCategoryId(post.getCategory().getCategoryId());
+        cat.setCategoryTitle(post.getCategory().getCategoryTitle());
+        cat.setCategoryDescription(post.getCategory().getCategoryDescription());
 
-        CategoryDto categoryDto = new CategoryDto();
-
-        categoryDto.setCategoryId(post.getCategory().getCategoryId());
-        categoryDto.setCategoryTitle(post.getCategory().getCategoryTitle());
-        categoryDto.setCategoryDescription(post.getCategory().getCategoryDescription());
-
-        /*dto.setCategory(categoryDto);*/
+        dto.setCategory(cat);
     }
 
     if (post.getUser() != null) {
-
         dto.setUserId(post.getUser().getUserId());
         dto.setUserName(post.getUser().getName());
-		}
+    }
 
-		return dto;
-	}
+    Set<CommentDto> comments = post.getComments().stream().map(comment -> {
+		CommentDto cdto = new CommentDto();
+		cdto.setId(comment.getId());
+		cdto.setContent(comment.getContent());
+		if (comment.getUser() != null) {
+            cdto.setUserId(comment.getUser().getUserId());
+            cdto.setUserName(comment.getUser().getName());
+        }
+        return cdto;
+    }).collect(Collectors.toSet());
+
+    dto.setComments(comments);
+
+    return dto;
+}
 
 }

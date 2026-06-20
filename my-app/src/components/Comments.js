@@ -11,7 +11,7 @@ const Comments = ({ postId }) => {
   const [error, setError] = useState(null);
 
   const handleDeleteComment = (commentId) => {
-  setComments((prev) => prev.filter(c => c.commentId !== commentId));
+  setComments((prev) => prev.filter(c => c.id !== commentId));
 };
 
   const { user } = useAuth();
@@ -98,7 +98,7 @@ const Comments = ({ postId }) => {
       ) : (
         comments.map((comment, i) => (
       <Comment
-        key={comment.commentId || i}
+        key={comment.id}
         comment={comment}
         
         onDelete={handleDeleteComment}

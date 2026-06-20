@@ -65,7 +65,7 @@ const router = createBrowserRouter([
       path: "posts", 
       element: <AdminPosts />
     },{ 
-      path: "/admin/comments", 
+      path: "comments", 
       element: <AdminComments />
     },
     { 

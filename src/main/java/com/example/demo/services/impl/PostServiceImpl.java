@@ -8,7 +8,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
+import com.example.demo.entities.Comment;
 import com.example.demo.entities.Category;
 import com.example.demo.entities.Post;
 import com.example.demo.entities.User;
@@ -18,6 +18,7 @@ import com.example.demo.payloads.CommentDto;
 import com.example.demo.payloads.PostDto;
 import com.example.demo.payloads.PostResponse;
 import com.example.demo.repositories.CategoryRepo;
+import com.example.demo.repositories.CommentRepo;
 import com.example.demo.repositories.PostRepo;
 import com.example.demo.repositories.UserRepo;
 import com.example.demo.services.PostService;
@@ -36,6 +37,9 @@ public class PostServiceImpl implements PostService {
 	
 	@Autowired
 	private CategoryRepo categoryRepo;
+
+	@Autowired
+    private CommentRepo commentRepo;
 	
 	@Override
 	public PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) {
@@ -166,18 +170,28 @@ public class PostServiceImpl implements PostService {
         dto.setUserName(post.getUser().getName());
     }
 
-    Set<CommentDto> comments = post.getComments().stream().map(comment -> {
-		CommentDto cdto = new CommentDto();
-		cdto.setId(comment.getId());
-		cdto.setContent(comment.getContent());
-		if (comment.getUser() != null) {
-            cdto.setUserId(comment.getUser().getUserId());
-            cdto.setUserName(comment.getUser().getName());
-        }
-        return cdto;
-    }).collect(Collectors.toSet());
+	List<Comment> commentList = commentRepo.findByPost(post);
+	Set<CommentDto> comments = commentList.stream()
+			.map(comment -> {
 
-    dto.setComments(comments);
+				CommentDto dtoComment = new CommentDto();
+
+				dtoComment.setId(comment.getId());
+				dtoComment.setContent(comment.getContent());
+
+				if (comment.getUser() != null) {
+					dtoComment.setUserId(comment.getUser().getUserId());
+					dtoComment.setUserName(comment.getUser().getName());
+				}
+
+				return dtoComment;
+
+			})
+			.collect(Collectors.toSet());
+
+	dto.setComments(comments);
+
+
 
     return dto;
 }

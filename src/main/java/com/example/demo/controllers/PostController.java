@@ -51,11 +51,21 @@ public class PostController {
 	public ResponseEntity<PostDto> createPost(
 			@RequestBody PostDto postDto,
 			@PathVariable Integer userId,
-			@PathVariable Integer categoryId
-			)
-	{
-		PostDto createPost = this.postService.createPost(postDto, userId, categoryId);
-		return new ResponseEntity<PostDto>(createPost, HttpStatus.CREATED);
+			@PathVariable Integer categoryId) {
+
+		try {
+
+			PostDto createPost =
+					this.postService.createPost(postDto, userId, categoryId);
+
+			return new ResponseEntity<>(createPost, HttpStatus.CREATED);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();   // VERY IMPORTANT
+
+			throw e;
+		}
 	}
 	
 	//get by user
@@ -81,9 +91,18 @@ public class PostController {
 			@RequestParam(value="sortBy", defaultValue=AppConstants.SORT_BY,required=false) String sortBy,
 			@RequestParam(value="sortDir",defaultValue=AppConstants.SORT_DIR,required=false) String sortDir) {
 		
-		PostResponse postResponse =this.postService.getAllPost(pageNumber,pageSize,sortBy,sortDir);
-		//return new ResponseEntity<List<PostDto>>(allPost, HttpStatus.OK);
-		return new ResponseEntity<PostResponse>(postResponse,HttpStatus.OK);
+		try {
+
+        PostResponse postResponse = this.postService.getAllPost(pageNumber,pageSize,sortBy,sortDir);
+
+        return ResponseEntity.ok(postResponse);
+
+    } catch (Exception e) {
+
+        e.printStackTrace();
+
+        throw e;
+    }
 	}
 		
 	 
@@ -127,14 +146,21 @@ public class PostController {
 	@PostMapping("/posts/image/upload/{postId}")
 	public ResponseEntity<PostDto> uploadPostImage(
 			@RequestParam("image") MultipartFile image,
-			@PathVariable Integer postId) throws IOException{
-		PostDto postDto=this.postService.getPostById(postId);
-		String fileName=this.fileService.uploadImage(path,  image);
+			@PathVariable Integer postId) throws IOException {
 
-		
+		System.out.println("===== UPLOAD API HIT =====");
+		System.out.println("Post Id = " + postId);
+		System.out.println("Original file = " + image.getOriginalFilename());
+
+		PostDto postDto = this.postService.getPostById(postId);
+
+		String fileName = this.fileService.uploadImage(path, image);
+
 		postDto.setImageName(fileName);
-		PostDto updatePost=this.postService.updatePost(postDto,  postId);
-		return new ResponseEntity<PostDto>(updatePost,HttpStatus.OK);
+
+		PostDto updatePost = this.postService.updatePost(postDto, postId);
+
+		return new ResponseEntity<>(updatePost, HttpStatus.OK);
 	}
 	
 	//method to serve files

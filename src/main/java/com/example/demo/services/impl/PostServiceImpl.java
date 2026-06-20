@@ -38,30 +38,53 @@ public class PostServiceImpl implements PostService {
 	private CategoryRepo categoryRepo;
 	
 	@Override
-	public PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) {
+public PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) {
 
-	    User user = this.userRepo.findById(userId)
-	            .orElseThrow(() -> new ResourceNotFoundException("User", "User id", userId));
+    try {
 
-	    Category category = this.categoryRepo.findById(categoryId)
-	            .orElseThrow(() -> new ResourceNotFoundException("Category", "Category id", categoryId));
+        System.out.println("STEP 1");
 
-	    Post post = this.modelMapper.map(postDto, Post.class);
+        User user = this.userRepo.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User","User id",userId));
 
-	    post.setImageName("default.png");
-	    post.setAddedDate(new Date());
-	    post.setUser(user);
-	    post.setCategory(category);
+        System.out.println("STEP 2");
 
-	    Post newPost = this.postRepo.save(post);
+        Category category = this.categoryRepo.findById(categoryId)
+                .orElseThrow(() -> new ResourceNotFoundException("Category","Category id",categoryId));
 
-	    PostDto postDtoResponse = this.modelMapper.map(newPost, PostDto.class);
+        System.out.println("STEP 3");
 
-	    postDtoResponse.setUserId(user.getUserId());
-	    postDtoResponse.setUserName(user.getName());
+        Post post = this.modelMapper.map(postDto, Post.class);
 
-	    return postDtoResponse;
-	}
+        System.out.println("STEP 4");
+
+        post.setImageName("default.png");
+        post.setAddedDate(new Date());
+        post.setUser(user);
+        post.setCategory(category);
+
+        System.out.println("STEP 5");
+
+        Post saved = this.postRepo.save(post);
+
+        System.out.println("STEP 6");
+
+        PostDto dto = this.modelMapper.map(saved, PostDto.class);
+
+        dto.setUserId(user.getUserId());
+        dto.setUserName(user.getName());
+
+        System.out.println("STEP 7");
+
+        return dto;
+
+    } catch (Exception e) {
+
+        e.printStackTrace();
+
+        throw e;
+    }
+}
 
 	@Override
 	public PostDto updatePost(PostDto postDto, Integer postId) {

@@ -17,20 +17,45 @@ import com.example.demo.services.FileService;
 public class FileServiceImpl implements FileService {
 
 	@Override
-	public String uploadImage(String path, MultipartFile file) throws IOException {
-		String name= file.getOriginalFilename();
-		String randomID= UUID.randomUUID().toString();
-		String fileName1= randomID.concat(name.substring(name.lastIndexOf(".")));
-		String filePath=path+File.separator+fileName1;
-		
-		File f = new File(path);
-		if(!f.exists()) {
-			f.mkdir();
-		}
-		Files.copy(file.getInputStream(), Paths.get(filePath));
-		
-		return fileName1;
-	}
+	@Override
+public String uploadImage(String path, MultipartFile file) throws IOException {
+
+    try {
+
+        String name = file.getOriginalFilename();
+
+        String randomID = UUID.randomUUID().toString();
+
+        String fileName = randomID + name.substring(name.lastIndexOf("."));
+
+        File folder = new File(path);
+
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+
+        String filePath = folder.getAbsolutePath() + File.separator + fileName;
+
+        System.out.println("===== IMAGE UPLOAD =====");
+        System.out.println("Configured path : " + path);
+        System.out.println("Absolute path   : " + folder.getAbsolutePath());
+        System.out.println("Saving file to  : " + filePath);
+
+        Files.copy(
+                file.getInputStream(),
+                Paths.get(filePath),
+                java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+
+        System.out.println("Image uploaded successfully!");
+
+        return fileName;
+
+    } catch (Exception e) {
+        System.out.println("IMAGE UPLOAD FAILED");
+        e.printStackTrace();
+        throw e;
+    }
+}
 
 	@Override
 	public InputStream getResource(String path, String fileName) throws FileNotFoundException {

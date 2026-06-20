@@ -16,8 +16,7 @@ import com.example.demo.services.FileService;
 @Service
 public class FileServiceImpl implements FileService {
 
-	@Override
-	@Override
+@Override
 public String uploadImage(String path, MultipartFile file) throws IOException {
 
     try {

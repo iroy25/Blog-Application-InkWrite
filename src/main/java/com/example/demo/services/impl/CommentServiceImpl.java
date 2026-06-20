@@ -2,7 +2,7 @@ package com.example.demo.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.util.List;
 import com.example.demo.entities.Comment;
 import com.example.demo.entities.Post;
 import com.example.demo.entities.User;
@@ -43,6 +43,33 @@ public class CommentServiceImpl implements CommentService {
 		commentdto.setUserId(savedComment.getUser().getUserId());
 		commentdto.setUserName(savedComment.getUser().getName());
 		return commentdto;
+	}
+
+	@Override
+	public List<CommentDto> getAllComments() {
+
+		List<Comment> comments = commentRepo.findAll();
+
+		return comments.stream().map(comment -> {
+
+			CommentDto dto = new CommentDto();
+
+			dto.setId(comment.getId());
+			dto.setContent(comment.getContent());
+
+			if (comment.getPost() != null) {
+				dto.setPostId(comment.getPost().getPostId());
+				dto.setPostTitle(comment.getPost().getTitle());
+			}
+
+			if (comment.getUser() != null) {
+				dto.setUserId(comment.getUser().getUserId());
+				dto.setUserName(comment.getUser().getName());
+			}
+
+			return dto;
+
+		}).toList();
 	}
 
 	@Override

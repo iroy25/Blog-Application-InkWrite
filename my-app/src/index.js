@@ -15,6 +15,7 @@ import SinglePostPage from './components/SinglePostPage';
 import { AuthProvider } from "./utils/AuthContext";
 
 import AdminLayout from './admin/AdminLayout';
+import AdminComments from './admin/AdminComments';
 import AdminDashboard from './admin/AdminDashboard';
 import AdminPosts from './admin/AdminPosts';
 import AdminPostForm from './admin/AdminPostForm';
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       path: "posts", 
       element: <AdminPosts />
     },{ 
+      path: "/admin/comments", 
+      element: <AdminComments />
+    },
+    { 
       path: "posts/create", 
       element: <AdminPostForm /> 
     },{ 

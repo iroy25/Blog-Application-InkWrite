@@ -13,6 +13,7 @@ import com.example.demo.entities.Category;
 import com.example.demo.entities.Post;
 import com.example.demo.entities.User;
 import com.example.demo.exceptions.ResourceNotFoundException;
+import com.example.demo.payloads.CategoryDto;
 import com.example.demo.payloads.PostDto;
 import com.example.demo.payloads.PostResponse;
 import com.example.demo.repositories.CategoryRepo;
@@ -38,53 +39,29 @@ public class PostServiceImpl implements PostService {
 	private CategoryRepo categoryRepo;
 	
 	@Override
-public PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) {
+	public PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) {
 
-    try {
+		User user = this.userRepo.findById(userId)
+				.orElseThrow(() ->
+						new ResourceNotFoundException("User", "User id", userId));
 
-        System.out.println("STEP 1");
+		Category category = this.categoryRepo.findById(categoryId)
+				.orElseThrow(() ->
+						new ResourceNotFoundException("Category", "Category id", categoryId));
 
-        User user = this.userRepo.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User","User id",userId));
+		Post post = new Post();
 
-        System.out.println("STEP 2");
+		post.setTitle(postDto.getTitle());
+		post.setContent(postDto.getContent());
+		post.setImageName("default.png");
+		post.setAddedDate(new Date());
+		post.setUser(user);
+		post.setCategory(category);
 
-        Category category = this.categoryRepo.findById(categoryId)
-                .orElseThrow(() -> new ResourceNotFoundException("Category","Category id",categoryId));
+		Post saved = this.postRepo.save(post);
 
-        System.out.println("STEP 3");
-
-        Post post = this.modelMapper.map(postDto, Post.class);
-
-        System.out.println("STEP 4");
-
-        post.setImageName("default.png");
-        post.setAddedDate(new Date());
-        post.setUser(user);
-        post.setCategory(category);
-
-        System.out.println("STEP 5");
-
-        Post saved = this.postRepo.save(post);
-
-        System.out.println("STEP 6");
-
-        PostDto dto = this.modelMapper.map(saved, PostDto.class);
-
-        dto.setUserId(user.getUserId());
-        dto.setUserName(user.getName());
-
-        System.out.println("STEP 7");
-
-        return dto;
-
-    } catch (Exception e) {
-
-        e.printStackTrace();
-
-        throw e;
-    }
-}
+		return convertToDto(saved);
+	}
 
 	@Override
 	public PostDto updatePost(PostDto postDto, Integer postId) {
@@ -94,7 +71,7 @@ public PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) {
 		post.setContent(postDto.getContent());
 		post.setImageName(postDto.getImageName());
 		Post updatedPost=this.postRepo.save(post);
-		return this.modelMapper.map(updatedPost,PostDto.class);
+		return convertToDto(updatedPost);
 	}
 
 	@Override
@@ -118,9 +95,7 @@ public PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) {
 		List<Post> allPosts = pagePost.getContent();
 		
 		
-		List<PostDto> postDtos= allPosts.stream().map((post)
-				->this.modelMapper.map(post, PostDto.class))
-				.collect(Collectors.toList());
+		List<PostDto> postDtos = allPosts.stream().map(this::convertToDto).collect(Collectors.toList());
 				
 		PostResponse postResponse= new PostResponse();
 		postResponse.setContent(postDtos);
@@ -136,7 +111,7 @@ public PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) {
 	public PostDto getPostById(Integer postId) {
 		Post post = this.postRepo.findById(postId)
 			.orElseThrow(()-> new ResourceNotFoundException("Post", "Post Id",postId));
-		return this.modelMapper.map(post,PostDto.class);
+		return convertToDto(post);
 	}
 
 	@Override
@@ -145,9 +120,7 @@ public PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) {
 				.orElseThrow(()->new ResourceNotFoundException("Category","Category id",categoryId));
 		List<Post> posts = this.postRepo.findByCategory(cat);
 		
-		List<PostDto> postDtos=posts.stream()
-				.map((post)->this.modelMapper.map(post, PostDto.class))
-				.collect((Collectors.toList()));
+		List<PostDto> postDtos=posts.stream().map(this::convertToDto).collect((Collectors.toList()));
 		
 		return postDtos;
 	}
@@ -159,7 +132,7 @@ public PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) {
 		List<Post> posts = this.postRepo.findByUser(user);
 		
 		List<PostDto> postDtos=posts.stream()
-				.map((post)->this.modelMapper.map(post, PostDto.class))
+				.map(this::convertToDto)
 				.collect((Collectors.toList()));
 		
 		return postDtos;
@@ -168,9 +141,40 @@ public PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) {
 	@Override
 	public List<PostDto> searchPosts(String keyword) {
 		List<Post> posts=this.postRepo.searchByTitle("%"+keyword+"%");
-		List<PostDto> postDtos = posts.stream().map((post)->this.modelMapper.map(post,PostDto.class))
+		List<PostDto> postDtos = posts.stream().map(this::convertToDto)
 				.collect(Collectors.toList());
 		return postDtos;
+	}
+
+
+	private PostDto convertToDto(Post post) {
+
+    PostDto dto = new PostDto();
+
+    dto.setPostId(post.getPostId());
+    dto.setTitle(post.getTitle());
+    dto.setContent(post.getContent());
+    dto.setImageName(post.getImageName());
+    dto.setAddedDate(post.getAddedDate());
+
+    if (post.getCategory() != null) {
+
+        CategoryDto categoryDto = new CategoryDto();
+
+        categoryDto.setCategoryId(post.getCategory().getCategoryId());
+        categoryDto.setCategoryTitle(post.getCategory().getCategoryTitle());
+        categoryDto.setCategoryDescription(post.getCategory().getCategoryDescription());
+
+        /*dto.setCategory(categoryDto);*/
+    }
+
+    if (post.getUser() != null) {
+
+        dto.setUserId(post.getUser().getUserId());
+        dto.setUserName(post.getUser().getName());
+		}
+
+		return dto;
 	}
 
 }

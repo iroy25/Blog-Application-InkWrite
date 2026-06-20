@@ -141,7 +141,6 @@ return (
                 <line x1="21" y1="12" x2="9" y2="12" />
               </svg>
               {sidebarOpen && "Log out"}
-               Log out
             </button>
              )}
              <button

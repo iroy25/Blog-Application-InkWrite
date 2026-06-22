@@ -1,6 +1,6 @@
 # ✍️ InkWrite — Full Stack Blog Platform
 
-A multi-role blogging platform built with Spring Boot, React.js, MySQL, and JWT authentication. Users can create, manage, and comment on posts; admins have full control over users, posts, and categories.
+A secure, role-based blogging platform built with Spring Boot, React, JWT Authentication, and PostgreSQL, featuring separate user and admin dashboards.
 
 ![Java](https://img.shields.io/badge/Java_17+-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
@@ -31,6 +31,7 @@ A multi-role blogging platform built with Spring Boot, React.js, MySQL, and JWT 
 - Read posts by other users
 - Comment on any post including reply to other comments
 - Read all comments on a post
+- Search post using keywords
 
 ### 🛡️ Admin
 - Full CRUD over all posts and users
@@ -41,16 +42,17 @@ A multi-role blogging platform built with Spring Boot, React.js, MySQL, and JWT 
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Backend | Spring Boot, Spring Security, Spring Data JPA |
-| Frontend | React.js, Tailwind CSS|
-| Database | MySQL |
-| Auth | JWT (Bearer Token, localStorage) |
-| API Docs | Swagger / OpenAPI |
-| Utilities | Lombok, Maven |
+| Layer             | Technology                                    |
+| ----------------- | --------------------------------------------- |
+| Backend           | Spring Boot, Spring Security, Spring Data JPA |
+| Frontend          | React.js, Tailwind CSS                        |
+| Database          | PostgreSQL (Neon)                             |
+| Authentication    | JWT (Bearer Token, localStorage)              |
+| API Documentation | Swagger / OpenAPI                             |
+| Build Tool        | Maven                                         |
+| Deployment        | Render (Backend), Neon (Managed PostgreSQL)   |
+| Utilities         | Lombok                                        |
 
----
 
 ## 🚀 Getting Started
 
@@ -86,11 +88,6 @@ A multi-role blogging platform built with Spring Boot, React.js, MySQL, and JWT 
 | `501` | ROLE_ADMIN | Manually in DB |
 | `502` | ROLE_USER | Auto on registration |
 
-> ⚠️ **Admin Setup:** Run this SQL after registering:
-> ```sql
-> UPDATE user_roles SET role_id = 501 WHERE user_id = {your_user_id};
-> ```
-> On next login the user will be redirected to Admin Dashboard automatically.
 
 ---
 
@@ -111,10 +108,58 @@ A multi-role blogging platform built with Spring Boot, React.js, MySQL, and JWT 
 
 
 
+---
+
+## 🔐 Live Demo
+
+🌐 Live Demo
+
+The application is deployed and publicly accessible.
+
+Frontend: https://inkwritefront.onrender.com/
+
+Backend API: https://blog-application-inkwrite.onrender.com
+
+The project is deployed using Render for the backend and configured with a managed PostgreSQL database hosted on Neon.
 
 
 
+---
 
+
+
+## 🔑 Demo Credentials
+
+### User Account
+
+Visitors can create their own account by following the normal authentication flow:
+
+```text
+Sign Up → Login → Browse Posts → Create Posts → Comment
+```
+
+### Admin Account
+
+For security reasons, administrator accounts cannot be created through the registration page.
+
+A demo administrator account has already been configured for testing:
+
+```text
+Email: markzoe@dev.in
+Password: Admin123@
+```
+
+Note: All newly registered users are automatically assigned the ROLE_USER role. For local development or testing, a user's role can be manually updated to ROLE_ADMIN in the database.
+
+
+---
+
+## 🚀 Future Enhancements
+- Store uploaded images using cloud object storage (AWS S3 or Cloudinary) instead of local/server storage.
+- Add password reset functionality using email tokens.
+- Introduce rich text editing for blog creation.
+- Enable post likes, bookmarks, and user profiles.
+- Add Docker support and CI/CD pipeline for automated deployment.
 
 
 ---

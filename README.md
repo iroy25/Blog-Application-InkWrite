@@ -145,7 +145,7 @@ For security reasons, administrator accounts cannot be created through the regis
 A demo administrator account has already been configured for testing:
 
 ```text
-Email: markzoe@dev.in
+Email: markzen@dev.in
 Password: Admin123@
 ```
 

@@ -59,7 +59,7 @@ A secure, role-based blogging platform built with Spring Boot, React, JWT Authen
 ### Prerequisites
 - Java 17+
 - Node.js 18+
-- MySQL 8 / Postgre
+- MySQL 8 / PostgreSQL
 - Maven
 
 ---

@@ -40,7 +40,9 @@ const PostEditor = ({ isAdmin = false }) => {
           setContent(post.content || "");
           setCategoryId(post.category?.categoryId || "");
           if (post.imageName && post.imageName !== "default.jpg") {
-            setImagePreview(`https://blog-application-inkwrite.onrender.com/api/posts/image/${post.imageName}`);
+            //setImagePreview(`https://blog-application-inkwrite.onrender.com/api/posts/image/${post.imageName}`);
+
+            setImagePreview(post.imageName);
           }
         })
         .catch(err => console.error("Failed to fetch post", err));
@@ -64,21 +66,17 @@ const PostEditor = ({ isAdmin = false }) => {
       let savedPostId = postId;
 
       if (isEditMode) {
-        
         await axiosInstance.put(`/api/posts/${postId}`, {
           title,
           content,
-          imageName: "default.jpg",
         });
       } else {
-
         const res = await axiosInstance.post(
           `/api/user/${user.id}/category/${categoryId}/posts`,
-          { title, content, imageName: "default.jpg" }
+          { title, content }
         );
         savedPostId = res.data.postId;
       }
-
 
       if (imageFile && savedPostId) {
         const formData = new FormData();
@@ -91,10 +89,10 @@ const PostEditor = ({ isAdmin = false }) => {
       }
 
       if (isAdmin) {
-    navigate("/admin/posts");
-    } else {
+        navigate("/admin/posts");
+      } else {
         navigate(`/post/${savedPostId}`);
-    }
+      }
     } catch (err) {
       console.error(err);
       setMessage("Failed to save post. Please try again.");
@@ -102,6 +100,7 @@ const PostEditor = ({ isAdmin = false }) => {
       setSubmitting(false);
     }
   };
+
 
   return (
     <div

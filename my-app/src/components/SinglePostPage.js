@@ -81,16 +81,16 @@ const SinglePostPage = () => {
         <span>{formattedDate}</span>
       </div>
 
-      {post.imageName && post.imageName !== "default.jpg" && (
-        <div className="mb-8 rounded-xl overflow-hidden shadow-md">
-          <img
-            src={`https://blog-application-inkwrite.onrender.com/api/posts/image/${post.imageName}`}
-            alt={post.title}
-            className="w-full object-cover max-h-[500px]"
-            onError={(e) => { e.target.style.display = "none"; }}
-          />
-        </div>
-      )}
+  {post.imageName && (
+  <div className="mb-8 rounded-xl overflow-hidden shadow-md">
+      <img
+        src={post.imageName}
+        alt={post.title}
+        className="w-full object-cover max-h-[500px]"
+        onError={(e) => { e.target.style.display = "none"; }}
+      />
+    </div>
+  )}
 
       <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed whitespace-pre-line">
         {post.content}

@@ -2,6 +2,7 @@ import axios from "axios";
 
 const axiosInstance = axios.create({
   baseURL: "https://blog-application-inkwrite.onrender.com",  
+  //baseURL:"http://localhost:9095",
 });
 
 axiosInstance.interceptors.request.use((config) => {

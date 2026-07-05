@@ -80,10 +80,11 @@ const AdminPosts = () => {
                 <th className="px-5 py-3" />
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#F7F5F2]">
+        
+        <tbody className="divide-y divide-[#F7F5F2]">
               {posts.map((post) => (
                 <tr key={post.postId} className="hover:bg-[#F7F5F2] transition">
-                  <td className="px-5 py-3.5">
+                <td className="px-5 py-3.5">
                     <span className="font-medium text-[#2C2C2A] line-clamp-1">{post.title}</span>
                   </td>
                   <td className="px-5 py-3.5 text-gray-500 hidden md:table-cell">{post.author_name || "—"}</td>

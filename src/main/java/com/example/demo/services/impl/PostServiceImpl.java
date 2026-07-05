@@ -44,22 +44,22 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) {
 
-		User user = this.userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "User id", userId));
+	    User user = this.userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "User id", userId));
 
-		Category category = this.categoryRepo.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException("Category", "Category id", categoryId));
+	    Category category = this.categoryRepo.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException("Category", "Category id", categoryId));
 
-		Post post = new Post();
+	    Post post = new Post();
 
-		post.setTitle(postDto.getTitle());
-		post.setContent(postDto.getContent());
-		post.setImageName("default.png");
-		post.setAddedDate(new Date());
-		post.setUser(user);
-		post.setCategory(category);
+	    post.setTitle(postDto.getTitle());
+	    post.setContent(postDto.getContent());
+	    post.setImageName(null);
+	    post.setAddedDate(new Date());
+	    post.setUser(user);
+	    post.setCategory(category);
 
-		Post saved = this.postRepo.save(post);
+	    Post saved = this.postRepo.save(post);
 
-		return convertToDto(saved);
+	    return convertToDto(saved);
 	}
 
 	@Override
@@ -68,7 +68,11 @@ public class PostServiceImpl implements PostService {
 				.orElseThrow(()-> new ResourceNotFoundException("Post", "Post Id",postId));
 		post.setTitle(postDto.getTitle());		
 		post.setContent(postDto.getContent());
-		post.setImageName(postDto.getImageName());
+		
+		if (postDto.getImageName() != null) {
+	        post.setImageName(postDto.getImageName());
+	    }
+		
 		Post updatedPost=this.postRepo.save(post);
 		return convertToDto(updatedPost);
 	}

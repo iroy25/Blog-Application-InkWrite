@@ -94,6 +94,12 @@ A secure, role-based blogging platform built with Spring Boot, React, JWT Authen
 ## 📸 ER Diagrams
 <img width="1052" height="822" alt="ER diagram-Page-1 drawio" src="https://github.com/user-attachments/assets/462b8af3-27a1-4cff-aff7-1e9c699ac2db" />
 
+## Top layer data flow diagram
+<img width="641" height="151" alt="top dia" src="https://github.com/user-attachments/assets/a9a5fee5-46fb-46e7-b42a-8f1ca32a7005" />
+
+
+## DFD Level 0
+<img width="2791" height="446" alt="DFD0 drawio" src="https://github.com/user-attachments/assets/89589cc5-3795-49bd-99d3-26e273b7bc14" />
 
 ### Screenshots — UI walkthrough
 <img width="1920" height="1080" alt="1" src="https://github.com/user-attachments/assets/098e8cad-1c01-4903-81f9-ca0cd5c60d0a" />
